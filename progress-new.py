@@ -113,8 +113,10 @@ accomplishments_text_legendary = [
 "You have slain the Mother of All Dragons.",
 "You have slain Dach'xilith'az'ichityl.",
 "You have slain King Myxo Dreamcaller in his deep realm.",
+"You have slain Moha-Go, the Herald of Ragnorra.",
 "You have bathed in the blood of Ssssy'is.",
 "You have disassembled the Toymaker.",
+"You have slain Deacon Raholla, the Herald of Father Llymic.",
 "You have slain Dustbone.",
 "You have slain Uroboros, Scourge of the North.",
 "You have ended Dulvuroth's unlife.",
@@ -148,7 +150,9 @@ tags = {
 "hive":			15,
 "rona":			16,
 "ely":			17,
-"abo":			18
+"abo":			18,
+"moha":			19,
+"deacon":		20
 }
 
 accomplishments_text_pre_legendary = [
@@ -280,13 +284,18 @@ search_tags_preLL = {
 }
 
 accomplishments_text_limbo = [
-"Not a single one yet."
+"You have defeated the Keeper of the Unbroken Circle in Limbo.",
+"You have crushed the Guardian of the Stone in Limbo.",
+"You have bested the Lord of Entropy, Ygorl.",
+"You have conquered the Lord of Madness, Ssendam."
 ]
 
 search_tags_limbo = {
-"None":				0,
+"keeper":                0,
+"guardian":                1,
+"ygorl":                2,
+"ssendam":                3,
 }
-
 #-----------------------------------------------------------------------------------------------------------------
 map_abyss_boss_to_run = {
 "Demogorgon":	"Gaping Maw",
