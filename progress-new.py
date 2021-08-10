@@ -348,7 +348,7 @@ def needs_upgrade ():
 				with command.ExecuteReader() as reader:
 					while reader.Read():
 						column_list.append(reader['name'])
-	except SQLiteException, e:
+	except SQLiteException as e:
 		logger.Error ("needs_upgrade() - SQlite Error: {0}", e.Message)
 #	logger.Info ("result list: {0}", ", ".join(sorted(column_list)))
 	if update_schema:
@@ -432,7 +432,7 @@ def create_db_tables():
 		command.ExecuteNonQuery()
 		command.CommandText = trigger_tags_ddl
 		command.ExecuteNonQuery()
-	except SQLiteException, e:
+	except SQLiteException as e:
 		# explicitely considering a 'duplicate column name' here
 		if not "duplicate column name: " in e.Message:
 			logger.Error ("create_db_tables() - SQlite Error: {0}", e.Message)
@@ -532,7 +532,7 @@ def update_player (abyss_tags, layer, pazunia, flush = True):
 
 			command.Dispose()
 
-	except SQLiteException, e:
+	except SQLiteException as e:
 		logger.Error ("update_player() - SQlite Error: {0}", e.Message)
 
 	finally:
@@ -575,7 +575,7 @@ def update_accomplishments_preLL (tags_preLL, all_pre_LL, flush = True):
 
 			command.Dispose()
 
-	except SQLiteException, e:
+	except SQLiteException as e:
 		logger.Error ("update_accomplishments_preLL() - SQlite Error: {0}", e.Message)
 
 	finally:
@@ -634,7 +634,7 @@ def update_accomplishments (prince_wins, demi_count, pelor, pazuzu, tags_LL, bit
 
 			command.Dispose()
 
-	except SQLiteException, e:
+	except SQLiteException as e:
 		logger.Error ("update_accomplishments() - SQlite Error: {0}", e.Message)
 
 	finally:
@@ -689,7 +689,7 @@ def update_playerinfo(player_name, cd_key, ip, level, xp, xp_tnl, deity, subrace
 
 			command.Dispose()
 
-	except SQLiteException, e:
+	except SQLiteException as e:
 		logger.Error ("update_playerinfo() - SQlite Error: {0}", e.Message)
 
 	finally:
@@ -1019,7 +1019,7 @@ def list_hell_layer(parameter):
 					out_msg += output_template.format(reader['demi_count'],reader['name'], reader['layer'])
 					characters_found += 1
 		display_result ("Next hell layer needed:", out_msg, characters_found, tabs, width, None)
-	except SQLiteException, e:
+	except SQLiteException as e:
 		logger.Error ("list_hell_layer() - SQlite Error: {0}", e.Message)
 
 
@@ -1061,7 +1061,7 @@ def list_abyss_tags(parameter):
 						out_msg += output_template.format((" ", "x")[reader['wands']==5], reader['name'], ', '.join(parts_shortened))
 					characters_found += 1
 		display_result ("Abyss parts finished:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_abyss_tags() - SQlite Error: {0}", e.Message)
 
 
@@ -1088,7 +1088,7 @@ def list_prince_wins(parameter):
 					out_msg += output_template.format(reader['name'], reader['prince_wins'] if reader['prince_wins'] != DBNull.Value else "NONE", ("", " Pelor")[reader['pelor']])
 					characters_found += 1
 		display_result ("Prince wins:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_prince_wins() - SQlite Error: {0}", e.Message)
 
 
@@ -1110,7 +1110,7 @@ def list_pandects (parameter):
 					out_msg += "  {0}\n".format(reader['name'])
 					characters_found += 1
 		display_result ("Characters used a pandect:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_pandects() - SQlite Error: {0}", e.Message)
 
 
@@ -1132,7 +1132,7 @@ def list_tomes (parameter):
 					out_msg += "  {0}\n".format(reader['name'])
 					characters_found += 1
 		display_result ("Characters used a tome:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_tome() - SQlite Error: {0}", e.Message)
 
 
@@ -1154,7 +1154,7 @@ def list_limbo (parameter):
 					out_msg += "  {0}\n".format(reader['name'])
 					characters_found += 1
 		display_result ("Characters which finished limbo:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_limbo() - SQlite Error: {0}", e.Message)
 
 
@@ -1186,7 +1186,7 @@ def list_subraces (parameter):
 					characters_found += 1
 		logger.Info("Message header *{0}*", out_msg)
 		display_result ("Characters by subrace:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_subrace() - SQlite Error: {0}", e.Message)
 
 
@@ -1215,7 +1215,7 @@ def list_proxy_needed (parameter):
 					out_msg += output_template.format(reader['name'])
 					characters_found += 1
 		display_result ("Characters missing pre LL tags:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_proxy_needed() - SQlite Error: {0}", e.Message)
 
 
@@ -1261,7 +1261,7 @@ def list_tag (search_tag):
 					out_msg += "  {0}\n".format(reader['name'])
 					characters_found += 1
 			display_result ("Characters found in need of *{0}*:".format(tags_processed), out_msg, characters_found)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_tag() - SQlite Error: {0}", e.Message)
 
 
@@ -1290,7 +1290,7 @@ def delete (parameter):
 		command.CommandText = "DELETE from tags where name = :name"
 		command.Parameters.Add(SQLiteParameter('name', name))
 		affected_rows = command.ExecuteNonQuery()
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("delete character() - SQlite Error: {0}", e.Message)
 	finally:
 		command.Dispose()
@@ -1331,7 +1331,7 @@ def list_xp (parameter):
 					out_msg += output_template.format(str(reader['level']), locale.format("%d", reader['xp'], grouping=True), locale.format("%d", reader['xp_tnl'], grouping=True), reader['name'])
 					characters_found += 1
 		display_result ("Characters by xp", out_msg, characters_found, tabs, width, alignments)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_xp() - SQlite Error: {0}", e.Message)
 
 
@@ -1360,7 +1360,7 @@ def list_level (parameter):
 					out_msg += output_template.format(locale.format("%d", reader['level']), reader['name'])
 					characters_found += 1
 		display_result ("Characters by level", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_level() - SQlite Error: {0}", e.Message)
 
 
@@ -1389,7 +1389,7 @@ def list_time_accessed (parameter):
 					out_msg += output_template.format(locale.format("%d", reader['elapsed']), reader['name'])
 					characters_found += 1
 		display_result ("Characters by last time played:", out_msg, characters_found, tabs, width)
-	except SQLiteException, e:
+	except SQLiteExcept as e:
 		logger.Error ("list_time_accessed() - SQlite Error: {0}", e.Message)
 
 
@@ -1557,7 +1557,7 @@ if __name__ == "__main__":
 		try:
 			db_connection = SQLiteConnection(sqlite_connection_string)
 			db_connection.Open()
-		except SQLiteException, e:
+		except SQLiteExcept as e:
 			logger.Error ("enable_tracker() - SQlite Error: {0}", e.Message)
 			logger.Error ("{0} disabled.", module_name)
 		else:
