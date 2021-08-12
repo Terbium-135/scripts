@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<runs>
+	<layer name="Avernus"
+	nickname="Tia"
+	immunities="Fire, Magical, BREACH"
+	note="Div KB by Tiamat"
+	/>
+	<layer name="Dispater"
+	immunities="Fire, Magical, Positive, Cold, Acid, BREACH, MORD"
+	nohit="Infernal Machines"
+	note=""
+	/>
+	<layer name="Minauron"
+	immunities="Acid, Magical, BREACH"
+	nohit="Mammon's Tears"
+	/>
+	<layer name="Phlegethos"
+	immunities="Acid, Magical, Fire, Pos, BREACH"
+	nohit="Pyrexic Fumes"
+	note=""
+	/>
+	<layer name="Stygia"
+	immunities="Cold, Divine, Pos, Magical, BREACH, MORD"
+	nohit="Arachill Spiders, Coldforge Constructs"
+	note="Frostweb's Freedom (Aboleth) makes immune to webs"
+	/>
+	<layer name="Malbolge"
+	immunities="Elec, Divine"
+	nohit="Winds"
+	note=""
+	/>
+	<layer name="Maladomini"
+	immunities="Acid, Elec, Magical, Divine, Fire, Pos, BREACH, MORD"
+	nohit="Infernal Machines"
+	note=""
+	/>
+	<layer name="Cania"
+	immunities="Cold, Divine, Pos, Magic, Acid, Elec, BREACH"
+	nohit="Arachill Spiders, Coldforge Contructs, Living Colds"
+	note=""
+	/>
+	<layer name="Nessus"
+	immunities="Acid, Elec, Magical, BREACH, MORD*"
+	note=""
+	/>
+	<layer name="Gaping Maw 1"
+	nickname="GM1"
+	immunities="Sonic, fire, div, acid, cold, pos"
+	nohit="Lemorian Screams"
+	note=""
+	/>
+</runs>
