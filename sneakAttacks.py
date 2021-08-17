@@ -113,7 +113,7 @@ def on_attacked(sender, e):
 	global visible
 	
 	if active:
-		if e.AttackMode & AttackMode.SneakAttack == AttackMode.SneakAttack:
+		if e.AttackMode & AttackMode.SneakAttack:
 			if visible:
 				info_area.Remove(sneak)
 				visible = False
