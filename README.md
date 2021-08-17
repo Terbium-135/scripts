@@ -22,4 +22,4 @@ This script is buggy right now. Due to the change in hell layers
 
 ## sneakAttacks.py
 
-Displays an info about the player character doing sneak attacks
+Displays an info if the player character is sneak attacking
