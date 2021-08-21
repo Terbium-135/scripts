@@ -114,6 +114,7 @@ def on_playerchanged(sender, e):
 
 	if hgx.Encounters.PlayerCharacter in CHARACTERS_TO_WATCH:
 		active = True
+		send_commands()
 	else:
 		info_area.Remove(arcane_fletchings)
 		active = False
@@ -137,7 +138,6 @@ def on_lineread_check_aa_levels(sender, e):
 			if result:
 				arcane_archer_levels += int(result.group(1))
 
-		# logger.Info("Arcane archer levels:\t => {0}", arcane_archer_levels)
 		if arcane_archer_levels >=4:
 			arcane_archer_fletchings_left = 3*arcane_archer_levels
 
@@ -176,8 +176,13 @@ def command_handler(sender, e):
 
 def on_resting(sender, e):
 
+	global active
+
 	if e.Finished:
-		info_area.Add(arcane_fletchings)
+		if active:
+			info_area.Add(arcane_fletchings)
+	else:
+		info_area.Remove(arcane_fletchings)
 
 
 if __name__ == "__main__":
