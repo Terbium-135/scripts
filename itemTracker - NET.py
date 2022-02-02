@@ -113,8 +113,8 @@ sqlite_connection_string_RO = sqlite_connection_string + "Read Only=True;"
 # Item tracking will be AUTO enabled on the following maps:
 active_on_maps = ["Bank of Waukeen", "Forge of Ixion", "Guild Dark Templars - Interior"]
 
-#debug = True
-debug = False
+debug = True
+# debug = False
 
 #script_version = "Old"
 script_version = "New"
@@ -319,7 +319,10 @@ def search_item (item):
 	order by c.name, i.name asc
 	'''
 
+	hgx.Messages.Show("DEBUGSTATUS: *{0}*", debug)
+	hgx.Messages.Show("ITEM: *{0}*", item)
 	if db_connection is None:
+		logger.Info("search_item() - NO connection to the database")
 		return
 
 	count_chests = 0
@@ -329,6 +332,8 @@ def search_item (item):
 	chests_only = True
 
 	old_chest = ""
+	hgx.Messages.Show("DEBUGSTATUS: *{0}*", debug)
+	hgx.Messages.Show("ITEM: *{0}*", item)
 
 	pattern = "%" + item.strip('"') + "%"
 	if debug:
@@ -916,7 +921,7 @@ def on_lineread(sender, e):
 			#return
 
 #------------------------------------------------------------------------------------------------------------------------------
-# chest closedd
+# chest closed
 #------------------------------------------------------------------------------------------------------------------------------
 		if "items successfully saved to" in line or "Chest empty. No items saved." in line:
 			chest_opened = False
@@ -1596,7 +1601,7 @@ def command_handler (sender, e):
 		if e.Parameters:
 			sub_command = e.Parameters[0]
 			if debug:
-				hgx.Messages.Show("Sub command: {0}", sub_command)
+				hgx.Messages.Show("Sub command: >{0}<", sub_command)
 			if sub_command.startswith("*"):
 				splits = sub_command.split (" ", 1)
 				command = splits[0]
@@ -1610,6 +1615,8 @@ def command_handler (sender, e):
 				else:
 					hgx.Messages.Show("Unknown command\n{0}", usage)
 			else:
+				if debug:
+					hgx.Messages.Show("Starting search for: >{0}<", sub_command)
 				search_item (sub_command)
 		else:
 			hgx.Messages.Show(usage)
